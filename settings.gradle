@@ -2,4 +2,4 @@ rootProject.name = 'order-platform-msa'
 
 include 'apiGateway'
 include 'eurekaServer'
-include 'review-service'
+//include 'review-service'

@@ -1,3 +1,0 @@
-[submodule "review-service"]
-	path = review-service
-	url = https://github.com/profect-team3/order-platform-msa-review.git
