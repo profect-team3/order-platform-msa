@@ -1,0 +1,46 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: apiGateway
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: true
+              lower-case-service-id: true
+
+          routes:
+            - id: review
+              uri: lb://review
+              predicates:
+                - Path=/review/**
+            - id: store
+              uri: lb://store
+              predicates:
+                - Path=/store/**
+            - id: order
+              uri: lb://order
+              predicates:
+                - Path=/order/**
+            - id: payment
+              uri: lb://payment
+              predicates:
+                - Path=/payment/**
+            - id: ai
+              uri: lb://ai
+              predicates:
+                - Path=/ai/**
+            - id: user
+              uri: lb://user
+              predicates:
+                - Path=/user/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
