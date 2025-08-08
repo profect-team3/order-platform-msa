@@ -19,10 +19,14 @@ spring:
               uri: lb://review
               predicates:
                 - Path=/review/**
+              filters:
+                - StripPrefix=1
             - id: store
               uri: lb://store
               predicates:
                 - Path=/store/**
+              filters:
+                - StripPrefix=1
             - id: order
               uri: lb://order
               predicates:
@@ -31,14 +35,36 @@ spring:
               uri: lb://payment
               predicates:
                 - Path=/payment/**
+              filters:
+                - StripPrefix=1
             - id: ai
               uri: lb://ai
               predicates:
                 - Path=/ai/**
+              filters:
+                - StripPrefix=1
             - id: user
               uri: lb://user
               predicates:
                 - Path=/user/**
+              filters:
+                - StripPrefix=1
+springdoc:
+  swagger-ui:
+    path: /docs
+    urls:
+      - name: store
+        url: /store/v3/api-docs
+      - name: review
+        url: /review/v3/api-docs
+      - name: order
+        url: /order/v3/api-docs
+      - name: payment
+        url: /payment/v3/api-docs
+      - name: ai
+        url: /ai/v3/api-docs
+      - name: user
+        url: /user/v3/api-docs
 
 eureka:
   client:
