@@ -1,3 +1,11 @@
+order-platform-msa-review
+order-platform-msa-ai
+order-platform-msa-order
+order-platform-msa-payment
+order-platform-msa-store
+order-platform-msa-user
+
+.env
 HELP.md
 .gradle
 build/

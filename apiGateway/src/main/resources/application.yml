@@ -49,6 +49,13 @@ spring:
                 - Path=/user/**
               filters:
                 - StripPrefix=1
+            - id: auth
+              uri: lb://auth
+              predicates:
+                - Path=/auth/**
+              filters:
+                - StripPrefix=1
+
 springdoc:
   swagger-ui:
     path: /docs
@@ -65,6 +72,8 @@ springdoc:
         url: /ai/v3/api-docs
       - name: user
         url: /user/v3/api-docs
+      - name: auth
+        url: /auth/v3/api-docs
 
 eureka:
   client:
