@@ -2,3 +2,6 @@ rootProject.name = 'order-platform-msa'
 
 include 'apiGateway'
 include 'eurekaServer'
+include 'order-platform-msa-order'
+include 'order-platform-msa-review'
+include 'order-platform-msa-ai'
