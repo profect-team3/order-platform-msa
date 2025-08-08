@@ -39,6 +39,10 @@ spring:
               uri: lb://user
               predicates:
                 - Path=/user/**
+            - id: auth
+              uri: lb://auth
+              predicates:
+                - Path=/auth/**
 
 eureka:
   client:
