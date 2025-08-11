@@ -55,7 +55,12 @@ spring:
                 - Path=/auth/**
               filters:
                 - StripPrefix=1
-
+            - id: mcp-server
+              uri: lb://mcp-server
+              predicates:
+                - Path=/mcp-server/**
+              filters:
+                - StripPrefix=1
 springdoc:
   swagger-ui:
     path: /docs
