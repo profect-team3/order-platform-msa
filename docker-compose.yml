@@ -1,6 +1,6 @@
 services:
   postgres:
-    image: postgres:latest
+    image: postgres:17.5
     container_name: sample-postgres
     ports:
       - 5432:5432
@@ -12,7 +12,7 @@ services:
       - ./.env
 
   redis:
-    image: redis:latest
+    image: redis:8.2.0
     container_name: sample-redis
     ports:
       - 6379:6379
@@ -23,12 +23,12 @@ services:
       - ./.env
 
   mongodb:
-    image: mongo:latest
+    image: mongo:8.0.12
     container_name: store-db
     ports:
       - 27017:27017
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
-      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=profectcloud
     env_file:
       - ./.env
