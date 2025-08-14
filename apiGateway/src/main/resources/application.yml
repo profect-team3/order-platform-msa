@@ -2,9 +2,15 @@ server:
   port: 8080
 
 spring:
+  config:
+    import: optional:file:.env[.properties],optional:file:../.env[.properties]
   application:
     name: apiGateway
-
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8083/oauth/jwks
   cloud:
     gateway:
       server:
@@ -84,3 +90,9 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
+
+
+auth:
+  internal-token:
+    url: http://localhost:8083/oauth2/token
+
