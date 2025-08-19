@@ -30,9 +30,9 @@ jobs:
           IMAGE_TAG="latest"
 
           # 🔹 order-platform-msa-review
-          docker build -f order-platform-msa-review/Dockerfile -t order-test-ecr-review:$IMAGE_TAG .
-          docker tag order-test-ecr-review:$IMAGE_TAG ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-review:$IMAGE_TAG
-          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-review:$IMAGE_TAG
+          docker build -f order-platform-msa-review/Dockerfile -t order-test-ecr-repo:$IMAGE_TAG .
+          docker tag order-test-ecr-repo:$IMAGE_TAG ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-repo:$IMAGE_TAG
+          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-repo:$IMAGE_TAG
 
           # 🔹 entity-repository
           docker build -f entity-repository/Dockerfile -t entity-test-ecr-repo:$IMAGE_TAG .
