@@ -25,3 +25,6 @@
 [submodule "order-platform-msa-ai"]
 	path = order-platform-msa-ai
 	url = https://github.com/profect-team3/order-platform-msa-ai.git
+[submodule "order-platform-msa-auth"]
+	path = order-platform-msa-auth
+	url = https://github.com/profect-team3/order-platform-msa-auth.git
