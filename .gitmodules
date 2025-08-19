@@ -19,3 +19,6 @@
 [submodule "order-platform-msa-review"]
 	path = order-platform-msa-review
 	url = https://github.com/profect-team3/order-platform-msa-review.git
+[submodule "order-platform-msa-payment"]
+	path = order-platform-msa-payment
+	url = https://github.com/profect-team3/order-platform-msa-payment.git
