@@ -13,3 +13,6 @@
 [submodule "order-platform-msa-report-python"]
 	path = order-platform-msa-report-python
 	url = https://github.com/profect-team3/order-platform-msa-report-python.git
+[submodule "order-platform-msa-report"]
+	path = order-platform-msa-report
+	url = https://github.com/profect-team3/order-platform-msa-report.git
