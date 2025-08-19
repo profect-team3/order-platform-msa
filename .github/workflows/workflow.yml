@@ -28,9 +28,9 @@ jobs:
       - name: Build & Push all services
         run: |
           # 🔹 order-platform-msa-review
-          docker build -f order-platform-msa-review/Dockerfile -t order-test-ecr-repo:review:latest .
-          docker tag order-test-ecr-repo:review:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-repo:review:latest
-          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-repo:review:latest
+          docker build -f order-platform-msa-review/Dockerfile -t order-test-ecr-repo:review .
+          docker tag order-test-ecr-repo:review ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-repo:review
+          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-repo:review
 #
 #          # 🔹 entity-repository
 #          docker build -f entity-repository/Dockerfile -t entity-test-ecr-repo:$IMAGE_TAG .
