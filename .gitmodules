@@ -1,0 +1,3 @@
+[submodule "entity-repository"]
+	path = entity-repository
+	url = https://github.com/profect-team3/entity-repository.git
