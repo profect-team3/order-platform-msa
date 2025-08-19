@@ -1,3 +1,6 @@
 [submodule "entity-repository"]
 	path = entity-repository
 	url = https://github.com/profect-team3/entity-repository.git
+[submodule "order-platform-msa-order"]
+	path = order-platform-msa-order
+	url = https://github.com/profect-team3/order-platform-msa-order.git
