@@ -39,7 +39,7 @@ public class GatewaySecurityChains {
 					"/actuator/health",
 					"/docs",
 					"/swagger-ui/**",
-					"/v3/api-docs/**").permitAll()
+					"/v3/api-docs/**","user/signup","payment/checkout").permitAll()
 				.anyExchange().authenticated()
 			)
 			.oauth2ResourceServer(o -> o.jwt(j -> j
