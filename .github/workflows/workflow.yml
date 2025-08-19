@@ -1,0 +1,80 @@
+name: ECR Push - All MSA Services
+
+on:
+  push:
+    branches: ["test/#4-CI-CD"]
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code with submodules
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: Set up AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+
+      - name: Login to ECR
+        run: |
+          aws ecr get-login-password --region ap-northeast-2 \
+          | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com
+
+      - name: Build & Push all services
+        run: |
+          IMAGE_TAG="latest"
+
+          # 🔹 order-platform-msa-review
+          docker build -f order-platform-msa-review/Dockerfile -t order-test-ecr-review:$IMAGE_TAG .
+          docker tag order-test-ecr-review:$IMAGE_TAG ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-review:$IMAGE_TAG
+          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-review:$IMAGE_TAG
+
+          # 🔹 entity-repository
+          docker build -f entity-repository/Dockerfile -t entity-test-ecr-repo:$IMAGE_TAG .
+          docker tag entity-test-ecr-repo:$IMAGE_TAG ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/entity-test-ecr-repo:$IMAGE_TAG
+          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/entity-test-ecr-repo:$IMAGE_TAG
+
+          # 🔹 order-platform-msa-order
+          docker build -f order-platform-msa-order/Dockerfile -t order-test-ecr-order:$IMAGE_TAG .
+          docker tag order-test-ecr-order:$IMAGE_TAG ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-order:$IMAGE_TAG
+          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-order:$IMAGE_TAG
+
+          # 🔹 order-platform-msa-store
+          docker build -f order-platform-msa-store/Dockerfile -t order-test-ecr-store:$IMAGE_TAG .
+          docker tag order-test-ecr-store:$IMAGE_TAG ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-store:$IMAGE_TAG
+          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-store:$IMAGE_TAG
+
+          # 🔹 order-platform-msa-user
+          docker build -f order-platform-msa-user/Dockerfile -t order-test-ecr-user:$IMAGE_TAG .
+          docker tag order-test-ecr-user:$IMAGE_TAG ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-user:$IMAGE_TAG
+          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-user:$IMAGE_TAG
+
+          # 🔹 order-platform-msa-report
+          docker build -f order-platform-msa-report/Dockerfile -t order-test-ecr-report:$IMAGE_TAG .
+          docker tag order-test-ecr-report:$IMAGE_TAG ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-report:$IMAGE_TAG
+          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-report:$IMAGE_TAG
+
+          # 🔹 order-platform-msa-payment
+          docker build -f order-platform-msa-payment/Dockerfile -t order-test-ecr-payment:$IMAGE_TAG .
+          docker tag order-test-ecr-payment:$IMAGE_TAG ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-payment:$IMAGE_TAG
+          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-payment:$IMAGE_TAG
+
+          # 🔹 order-platform-msa-ai
+          docker build -f order-platform-msa-ai/Dockerfile -t order-test-ecr-ai:$IMAGE_TAG .
+          docker tag order-test-ecr-ai:$IMAGE_TAG ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-ai:$IMAGE_TAG
+          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-ai:$IMAGE_TAG
+
+          # 🔹 order-platform-msa-auth
+          docker build -f order-platform-msa-auth/Dockerfile -t order-test-ecr-auth:$IMAGE_TAG .
+          docker tag order-test-ecr-auth:$IMAGE_TAG ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-auth:$IMAGE_TAG
+          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-auth:$IMAGE_TAG
+
+          # 🔹 order-platform-msa-mcp-server
+          docker build -f order-platform-msa-mcp-server/Dockerfile -t order-test-ecr-mcp:$IMAGE_TAG .
+          docker tag order-test-ecr-mcp:$IMAGE_TAG ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-mcp:$IMAGE_TAG
+          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-mcp:$IMAGE_TAG
