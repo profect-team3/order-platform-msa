@@ -7,3 +7,6 @@
 [submodule "order-platform-msa-store"]
 	path = order-platform-msa-store
 	url = https://github.com/profect-team3/order-platform-msa-store.git
+[submodule "order-platform-msa-user"]
+	path = order-platform-msa-user
+	url = https://github.com/profect-team3/order-platform-msa-user.git
