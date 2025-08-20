@@ -1,9 +1,9 @@
-docker build -f order-platform-msa-review/Dockerfile -t order-test-ecr-repo:review .
-docker build -f order-platform-msa-order/Dockerfile -t order-test-ecr-repo:order .
-docker build -f order-platform-msa-store/Dockerfile -t order-test-ecr-repo:store .
-docker build -f order-platform-msa-user/Dockerfile -t order-test-ecr-repo:user .
-docker build -f order-platform-msa-report/Dockerfile -t order-test-ecr-repo:report .
-docker build -f order-platform-msa-payment/Dockerfile -t order-test-ecr-repo:payment .
-docker build -f order-platform-msa-ai/Dockerfile -t order-test-ecr-repo:ai .
-docker build -f order-platform-msa-auth/Dockerfile -t order-test-ecr-repo:auth .
-docker build -f order-platform-msa-mcp-server/Dockerfile -t order-test-ecr-repo:mcp-server .
+docker build -f order-platform-msa-review/Dockerfile -t order-platform-msa-review . #8086
+docker build -f order-platform-msa-order/Dockerfile -t order-platform-msa-order . #8084
+docker build -f order-platform-msa-store/Dockerfile -t order-platform-msa-store . #8082
+docker build -f order-platform-msa-user/Dockerfile -t order-platform-msa-user . #8081
+docker build -f order-platform-msa-report/Dockerfile -t order-platform-msa-report . #8090
+docker build -f order-platform-msa-payment/Dockerfile -t order-platform-msa-payment . #8085
+docker build -f order-platform-msa-ai/Dockerfile -t order-platform-msa-ai . #8089
+docker build -f order-platform-msa-auth/Dockerfile -t order-platform-msa-auth . #8083
+docker build -f order-platform-msa-mcp-server/Dockerfile -t order-platform-msa-mcp-server . #8099
