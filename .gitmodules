@@ -1,0 +1,30 @@
+[submodule "entity-repository"]
+	path = entity-repository
+	url = https://github.com/profect-team3/entity-repository.git
+[submodule "order-platform-msa-order"]
+	path = order-platform-msa-order
+	url = https://github.com/profect-team3/order-platform-msa-order.git
+[submodule "order-platform-msa-store"]
+	path = order-platform-msa-store
+	url = https://github.com/profect-team3/order-platform-msa-store.git
+[submodule "order-platform-msa-user"]
+	path = order-platform-msa-user
+	url = https://github.com/profect-team3/order-platform-msa-user.git
+[submodule "order-platform-msa-report"]
+	path = order-platform-msa-report
+	url = https://github.com/profect-team3/order-platform-msa-report.git
+[submodule "order-platform-msa-review"]
+	path = order-platform-msa-review
+	url = https://github.com/profect-team3/order-platform-msa-review.git
+[submodule "order-platform-msa-payment"]
+	path = order-platform-msa-payment
+	url = https://github.com/profect-team3/order-platform-msa-payment.git
+[submodule "order-platform-msa-ai"]
+	path = order-platform-msa-ai
+	url = https://github.com/profect-team3/order-platform-msa-ai.git
+[submodule "order-platform-msa-auth"]
+	path = order-platform-msa-auth
+	url = https://github.com/profect-team3/order-platform-msa-auth.git
+[submodule "order-platform-msa-mcp-server"]
+	path = order-platform-msa-mcp-server
+	url = https://github.com/profect-team3/order-platform-msa-mcp-server.git
