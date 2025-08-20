@@ -2,7 +2,7 @@ name: ECR Push - All MSA Services
 
 on:
   push:
-    branches: ["test-CI-CD"]
+    branches: ["dev"]
 
 jobs:
   build-and-push:
