@@ -1,6 +1,7 @@
-name: ECR Push - All MSA Services
+name: ECR Push - Selected MSA Services
 
 on:
+  workflow_dispatch:
   push:
     branches: ["dev"]
 
@@ -8,25 +9,25 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
     steps:
-      # 🔹 메인 리포지토리 체크아웃
+      # 🔹 메인 리포지토리 체크아웃 (서브모듈 제외)
       - name: Checkout main repo
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          submodules: false  # 기본 서브모듈은 가져오지 않음
+          submodules: false
 
       # 🔹 필요한 서브모듈만 초기화
-      - name: Checkout needed submodules
+      - name: Initialize required submodules
         run: |
-          git submodule update --init order-platform-msa-review
-          git submodule update --init order-platform-msa-order
-          git submodule update --init order-platform-msa-store
-          git submodule update --init order-platform-msa-user
-          git submodule update --init order-platform-msa-report
-          git submodule update --init order-platform-msa-payment
-          git submodule update --init order-platform-msa-ai
-          git submodule update --init order-platform-msa-auth
-          git submodule update --init order-platform-msa-mcp-server
+          git submodule update --init --remote order-platform-msa-review
+          git submodule update --init --remote order-platform-msa-order
+          git submodule update --init --remote order-platform-msa-store
+          git submodule update --init --remote order-platform-msa-user
+          git submodule update --init --remote order-platform-msa-report
+          git submodule update --init --remote order-platform-msa-payment
+          git submodule update --init --remote order-platform-msa-ai
+          git submodule update --init --remote order-platform-msa-auth
+          git submodule update --init --remote order-platform-msa-mcp-server
 
       # 🔹 AWS 자격 증명 설정
       - name: Set up AWS credentials
