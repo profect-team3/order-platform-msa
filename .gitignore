@@ -37,4 +37,6 @@ out/
 ### VS Code ###
 .vscode/
 
+docker-build-all.sh
+
 
