@@ -2,17 +2,33 @@ name: ECR Push - All MSA Services
 
 on:
   push:
-    branches: ["dev"]
+    branches: ["test-CI-CD"]
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code with submodules
+      # 🔹 메인 리포지토리 체크아웃
+      - name: Checkout main repo
         uses: actions/checkout@v3
         with:
-          submodules: true
+          fetch-depth: 0
+          submodules: false  # 기본 서브모듈은 가져오지 않음
 
+      # 🔹 필요한 서브모듈만 초기화
+      - name: Checkout needed submodules
+        run: |
+          git submodule update --init order-platform-msa-review
+          git submodule update --init order-platform-msa-order
+          git submodule update --init order-platform-msa-store
+          git submodule update --init order-platform-msa-user
+          git submodule update --init order-platform-msa-report
+          git submodule update --init order-platform-msa-payment
+          git submodule update --init order-platform-msa-ai
+          git submodule update --init order-platform-msa-auth
+          git submodule update --init order-platform-msa-mcp-server
+
+      # 🔹 AWS 자격 증명 설정
       - name: Set up AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -20,56 +36,57 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-northeast-2
 
+      # 🔹 ECR 로그인
       - name: Login to ECR
         run: |
           aws ecr get-login-password --region ap-northeast-2 \
           | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com
 
+      # 🔹 Docker build & push
       - name: Build & Push all services
         run: |
-          # 🔹 order-platform-msa-review
-          docker build -f order-platform-msa-review/Dockerfile -t order-test-ecr-repo:review .
+          # order-platform-msa-review
+          docker build -f order-platform-msa-review/Dockerfile -t order-test-ecr-repo:review order-platform-msa-review
           docker tag order-test-ecr-repo:review ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-repo:review
           docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-repo:review
 
-           🔹 order-platform-msa-order
-          docker build -f order-platform-msa-order/Dockerfile -t order-test-ecr-repo:order .
+          # order-platform-msa-order
+          docker build -f order-platform-msa-order/Dockerfile -t order-test-ecr-repo:order order-platform-msa-order
           docker tag order-test-ecr-repo:order ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-repo:order
           docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-repo:order
 
-          # 🔹 order-platform-msa-store
-          docker build -f order-platform-msa-store/Dockerfile -t order-test-ecr-repo:store .
+          # order-platform-msa-store
+          docker build -f order-platform-msa-store/Dockerfile -t order-test-ecr-repo:store order-platform-msa-store
           docker tag order-test-ecr-repo:store ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-repo:store
           docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-repo:store
 
-          # 🔹 order-platform-msa-user
-          docker build -f order-platform-msa-user/Dockerfile -t order-test-ecr-repo:user .
+          # order-platform-msa-user
+          docker build -f order-platform-msa-user/Dockerfile -t order-test-ecr-repo:user order-platform-msa-user
           docker tag order-test-ecr-repo:user ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-repo:user
           docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-repo:user
 
-          # 🔹 order-platform-msa-report
-          docker build -f order-platform-msa-report/Dockerfile -t order-test-ecr-repo:report .
+          # order-platform-msa-report
+          docker build -f order-platform-msa-report/Dockerfile -t order-test-ecr-repo:report order-platform-msa-report
           docker tag order-test-ecr-repo:report ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-repo:report
           docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-repo:report
 
-          # 🔹 order-platform-msa-payment
-          docker build -f order-platform-msa-payment/Dockerfile -t order-test-ecr-repo:payment .
+          # order-platform-msa-payment
+          docker build -f order-platform-msa-payment/Dockerfile -t order-test-ecr-repo:payment order-platform-msa-payment
           docker tag order-test-ecr-repo:payment ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-repo:payment
           docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-repo:payment
 
-          # 🔹 order-platform-msa-ai
-          docker build -f order-platform-msa-ai/Dockerfile -t order-test-ecr-repo:ai .
+          # order-platform-msa-ai
+          docker build -f order-platform-msa-ai/Dockerfile -t order-test-ecr-repo:ai order-platform-msa-ai
           docker tag order-test-ecr-repo:ai ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-repo:ai
           docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-repo:ai
 
-          # 🔹 order-platform-msa-auth
-          docker build -f order-platform-msa-auth/Dockerfile -t order-test-ecr-repo:auth .
+          # order-platform-msa-auth
+          docker build -f order-platform-msa-auth/Dockerfile -t order-test-ecr-repo:auth order-platform-msa-auth
           docker tag order-test-ecr-repo:auth ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-repo:auth
           docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-repo:auth
 
-          # 🔹 order-platform-msa-mcp-server
-          docker build -f order-platform-msa-mcp-server/Dockerfile -t order-test-ecr-repo:mcp-server .
+          # order-platform-msa-mcp-server
+          docker build -f order-platform-msa-mcp-server/Dockerfile -t order-test-ecr-repo:mcp-server order-platform-msa-mcp-server
           docker tag order-test-ecr-repo:mcp-server ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-repo:mcp-server
           docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-repo:mcp-server
-
 
