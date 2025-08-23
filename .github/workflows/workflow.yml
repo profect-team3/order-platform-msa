@@ -19,6 +19,7 @@ jobs:
       # 🔹 필요한 서브모듈만 초기화
       - name: Initialize required submodules
         run: |
+          git submodule update --init --remote order-platform-msa-review
           git submodule update --init --remote order-platform-msa-order
           git submodule update --init --remote order-platform-msa-store
           git submodule update --init --remote order-platform-msa-user
