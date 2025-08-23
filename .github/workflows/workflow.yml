@@ -3,7 +3,7 @@ name: ECR Push - Selected MSA Services
 on:
   workflow_dispatch:
   push:
-    branches: ["dev"]
+    branches: ["main"]
 
 jobs:
   build-and-push:
