@@ -15,6 +15,7 @@ java {
 
 
 dependencies {
+    implementation platform("org.springframework.cloud:spring-cloud-dependencies:${rootProject.ext.springCloudVersion}")
     implementation 'org.springframework.boot:spring-boot-starter'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
@@ -35,9 +36,4 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
-}
-dependencyManagement {
-    imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:2025.0.0"
-    }
 }
