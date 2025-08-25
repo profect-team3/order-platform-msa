@@ -96,6 +96,6 @@ jobs:
           
           # order-platform-msa-mcp-server
           ls -la order-platform-msa-mcp-server
-          docker build -f order-platform-msa-mcp-server/Dockerfile -t order-test-ecr-mcp-server:latest .
-          docker tag order-test-ecr-mcp-server:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-mcp-server:latest
-          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-mcp-server:latest
+          docker build -f order-platform-msa-mcp-server/Dockerfile -t order-test-ecr-mcpserver:latest .
+          docker tag order-test-ecr-mcpserver:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-mcpserver:latest
+          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/order-test-ecr-mcpserver:latest
