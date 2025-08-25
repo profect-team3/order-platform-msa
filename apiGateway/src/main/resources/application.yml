@@ -67,6 +67,12 @@ spring:
                 - Path=/mcp-server/**
               filters:
                 - StripPrefix=1
+            - id: report
+              uri: lb://report
+              predicates:
+                - Path=/report/**
+              filters:
+                - StripPrefix=1
 springdoc:
   swagger-ui:
     path: /docs
@@ -85,6 +91,8 @@ springdoc:
         url: /user/v3/api-docs
       - name: auth
         url: /auth/v3/api-docs
+      - name: report
+        url: /report/v3/api-docs
 
 eureka:
   client:
