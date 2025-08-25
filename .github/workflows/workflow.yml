@@ -43,6 +43,14 @@ jobs:
           aws ecr get-login-password --region ap-northeast-2 \
           | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com
 
+
+      - name: Publish Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: build/reports/tests/test
+
       # 🔹 Docker build & push
       - name: Build & Push all services
         run: |
