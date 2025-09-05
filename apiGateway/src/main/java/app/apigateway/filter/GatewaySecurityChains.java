@@ -37,9 +37,9 @@ public class GatewaySecurityChains {
 				.pathMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 				.pathMatchers("/auth/**",
 					"/actuator/health",
-					"/docs",
+					"/docs","/oauth/jwks",
 					"/swagger-ui/**",
-					"/v3/api-docs/**","user/signup","payment/checkout").permitAll()
+					"/v3/api-docs/**","/user/user/signup","/payment/checkout").permitAll()
 				.anyExchange().authenticated()
 			)
 			.oauth2ResourceServer(o -> o.jwt(j -> j
