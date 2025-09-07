@@ -37,3 +37,6 @@
 [submodule "order-platform-msa-mcp-server"]
 	path = order-platform-msa-mcp-server
 	url = https://github.com/profect-team3/order-platform-msa-mcp-server.git
+[submodule "order-platform-msa-forecast"]
+	path = order-platform-msa-forecast
+	url = https://github.com/profect-team3/order-platform-msa-forecast.git
