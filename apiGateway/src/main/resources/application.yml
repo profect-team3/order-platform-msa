@@ -73,6 +73,12 @@ spring:
                 - Path=/report/**
               filters:
                 - StripPrefix=1
+            - id: forecast
+              uri: lb://forecast
+              predicates:
+                - Path=/forecast/**
+              filters:
+                - StripPrefix=1
 springdoc:
   swagger-ui:
     path: /docs
@@ -93,6 +99,8 @@ springdoc:
         url: /auth/v3/api-docs
       - name: report
         url: /report/v3/api-docs
+      - name: forecast
+        url: /forecast/v3/api-docs
 
 eureka:
   client:
